@@ -10,6 +10,8 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bd_equipo.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     
+    app.config['SECRET_KEY'] = 'mi_clave_secreta_super_segura_123'
+    
     db.init_app(app)
     migrate.init_app(app,db)
     

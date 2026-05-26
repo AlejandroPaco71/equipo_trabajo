@@ -1,5 +1,5 @@
 # Librerias a usar en el modulo
-from flask import request,render_template,redirect,url_for,Blueprint
+from flask import request,render_template,redirect,url_for,Blueprint, flash
 
 # Referencia a la base de datos
 from blueprintapp.app import db
@@ -25,6 +25,7 @@ def create():
         # Insertar en la bd a traves del ORM
         db.session.add(tarea)
         db.session.commit()
+        flash('Registro exitoso', 'success')
         # Redireccion al listado de miembros
         return redirect(url_for('bp_tarea.index'))
     
@@ -41,6 +42,7 @@ def edit(id):
         tarea.descripcion = descripcion
         tarea.completado = completado
         db.session.commit()
+        flash('Actualizacion exitoso', 'success')
         # Redirigimos al listado
         return redirect(url_for("bp_tarea.index"))
     
@@ -57,6 +59,7 @@ def delete(id):
     # Eliminamos el registro
     db.session.delete(tarea)
     db.session.commit()
+    flash('Eliminacion exitoso', 'success')
     # Redirigimos al listado de tareas
     return redirect(url_for("bp_tarea.index"))
         

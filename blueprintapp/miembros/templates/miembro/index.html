@@ -2,10 +2,22 @@
 
 
 {% block content %}
+
 <div class="container">
     <h2>Miembros</h2>
     <a href="{{ url_for('bp_miembro.create') }}" class="btn btn-primary mb-3">Nuevo Miembro</a>
-    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show"
+        role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -24,7 +36,8 @@
                 <td>{{ miembro.email }}</td>
                 <td>
                     <a href="{{ url_for('bp_miembro.edit', id=miembro.id) }}" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="{{ url_for('bp_miembro.delete', id=miembro.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Estás seguro de eliminar ?')">Eliminar</a>
+                    <a href="{{ url_for('bp_miembro.delete', id=miembro.id) }}" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Estás seguro de eliminar ?')">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
@@ -32,5 +45,3 @@
     </table>
 </div>
 {% endblock %}
-
-

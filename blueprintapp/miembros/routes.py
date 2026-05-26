@@ -1,5 +1,5 @@
 #Librerais a usar en el modulo
-from flask import Flask, request, render_template, redirect, url_for,Blueprint
+from flask import Flask, request, render_template, redirect, url_for,Blueprint, flash
 #referencia a la base de datos
 from blueprintapp.app import db
 #Modulo con los que interractuan 
@@ -23,6 +23,7 @@ def create():
         #Insertamos en la bd a travez del ORM
         db.session.add(miembro)
         db.session.commit()
+        flash('Registro exitoso', 'success')
         #redireccion al listado de miembros
         return redirect(url_for('bp_miembro.index'))
 
@@ -38,6 +39,7 @@ def edit(id):
         miembro.nombre = nombre
         miembro.email = email
         db.session.commit()
+        flash('Actualizacion exitoso', 'success')
         # Redireccion al listado de miembros
         return redirect(url_for('bp_miembro.index'))
     
@@ -54,6 +56,7 @@ def delete(id):
     # Eliminamos el miembro
     db.session.delete(miembro)
     db.session.commit()
+    flash('Eliminacion exitoso', 'success')
     # Redirigimos al listado
     return redirect(url_for("bp_miembro.index"))
         
