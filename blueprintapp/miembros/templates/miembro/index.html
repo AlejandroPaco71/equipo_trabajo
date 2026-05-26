@@ -9,6 +9,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>#</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Correo</th>
@@ -17,6 +18,7 @@
         <tbody>
             {% for miembro in miembros %}
             <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ miembro.id }}</td>
                 <td>{{ miembro.nombre }}</td>
                 <td>{{ miembro.email }}</td>

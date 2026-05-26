@@ -10,6 +10,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>#</th>
                 <th>ID</th>
                 <th>Descipcion</th>
                 <th>Completado</th>
@@ -18,6 +19,7 @@
         <tbody>
             {% for tarea in tareas %}
             <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ tarea.id }}</td>
                 <td>{{ tarea.descripcion }}</td>
                 <td>{{ tarea.completado }}</td>
