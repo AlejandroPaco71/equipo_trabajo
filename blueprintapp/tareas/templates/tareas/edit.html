@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Actualizar Miembro</h1>
+
+<form action="{{ url_for('bp_tarea.edit', id=tarea.id) }}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Descipcion</label>
+        <input type="text" class="form-control" value="{{ tarea.descripcion }}" name="descripcion" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Completado</label>
+        <input type="checkbox" class="form-check-input"  name="completado" {% if tarea.completado %}checked{% endif %} >
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar Tarea</button>
+    <a class="btn btn-secondary" href="{{ url_for('bp_tarea.index' )}}">Cancelar</a>
+</form>
+
+{% endblock %}
