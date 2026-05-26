@@ -21,7 +21,10 @@
                 <td>{{ tarea.id }}</td>
                 <td>{{ tarea.descripcion }}</td>
                 <td>{{ tarea.completado }}</td>
-
+                <td>
+                    <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{url_for('bp_tarea.delete', id=tarea.id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Estás seguro de eliminar ?')">Eliminar</a>
+                </td>
             </tr>
             {% else %}
             <h2>No hay Tareas</h2>

@@ -27,6 +27,39 @@ def create():
         db.session.commit()
         # Redireccion al listado de miembros
         return redirect(url_for('bp_tarea.index'))
+    
+
+# Para actualizar una tarea
+@bp_tarea.route("/edit/<int:id>" , methods=["GET", "POST"])
+def edit(id):
+    if request.method == "POST":
+        descripcion = request.form['descripcion']
+        completado = True if 'completado' in request.form.keys() else False
+        # Buscamos la tarea en la BD
+        tarea = Tarea.query.get(id)
+        # Actualizamos los datos la tarea
+        tarea.descripcion = descripcion
+        tarea.completado = completado
+        db.session.commit()
+        # Redirigimos al listado
+        return redirect(url_for("bp_tarea.index"))
+    
+    # Si es GET, mostramos el formulario con datos actuales
+    tarea = Tarea.query.get(id)
+    
+    return render_template("tareas/edit.html" , tarea=tarea)
+
+# Para eliminar una tarea
+@bp_tarea.route("/delete/<int:id>")
+def delete(id):
+    # Buscamos la tarea en la BD por su id
+    tarea = Tarea.query.get(id)
+    # Eliminamos el registro
+    db.session.delete(tarea)
+    db.session.commit()
+    # Redirigimos al listado de tareas
+    return redirect(url_for("bp_tarea.index"))
+        
         
         
 
